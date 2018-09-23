@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class User(models.Model):
     name      = models.CharField(max_length=50)
     email     = models.CharField(max_length=30)
@@ -7,11 +8,13 @@ class User(models.Model):
     language  = models.CharField(max_length=30)
     birthdate = models.DateField()
 
+
 class Course(models.Model):
     teacher     = models.ForeignKey(User, on_delete=models.CASCADE)
     title       = models.CharField(max_length=50)
     description = models.TextField()
     level       = models.CharField(max_length=30)
+
 
 class Take(models.Model):
     student     = models.ForeignKey(User, on_delete=models.CASCADE)
