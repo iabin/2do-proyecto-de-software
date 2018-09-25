@@ -41,13 +41,14 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             #este form save, guarda en la base, solo es eso
-            form.save()
+            form.save(commit=False)
             return redirect('signup')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-
+def index(request):
+    return render(request,'index.html')
 # Create your views here.
 
 
