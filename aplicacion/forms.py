@@ -9,7 +9,7 @@ class SignUpForm(forms.ModelForm):
       class Meta:
         model = User
 
-        fields = ('id','name','email','password','language','birthdate')
+        fields = ('id','name','email','password','language','birthdate','profile_pic')
 
         labels = {
             'name': _('Nombre'),

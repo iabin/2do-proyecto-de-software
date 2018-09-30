@@ -41,7 +41,8 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             #este form save, guarda en la base, solo es eso
-            form.save(commit=False)
+            #form.save(commit=False)
+            form.save()
             return redirect('signup')
     else:
         form = SignUpForm()
