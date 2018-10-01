@@ -1,3 +1,5 @@
+from django.http import HttpResponse
+
 from aplicacion.models import User, Course, Take
 from aplicacion.serializers import UserSerializer, CourseSerializer, TakeSerializer
 from rest_framework import generics
@@ -40,16 +42,25 @@ def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            #este form save, guarda en la base, solo es eso
-            #form.save(commit=False)
+            # este form save, guarda en la base, solo es eso
+            # form.save(commit=False)
             form.save()
             return redirect('signup')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
 def index(request):
-    return render(request,'index.html')
+    return render(request, 'index.html')
+
+
+def busca(request):
+    toSearch = request.GET['busqueda']
+    if not toSearch:
+        return HttpResponse("return this string")
+    searchResult = Course.objects.filter(title__icontains=toSearch)
+    return render(request, 'resultados.html', {'resultados': searchResult})
+
+
 # Create your views here.
-
-

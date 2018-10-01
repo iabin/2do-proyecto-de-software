@@ -30,3 +30,4 @@ class SignUpForm(forms.ModelForm):
                 'max_length': _("This writer's name is too long."),
             },
         }
+
