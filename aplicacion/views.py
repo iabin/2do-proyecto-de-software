@@ -1,9 +1,11 @@
+from django.contrib.auth import login
 from django.http import HttpResponse
-
 from aplicacion.models import User, Course, Take
 from aplicacion.serializers import UserSerializer, CourseSerializer, TakeSerializer
 from rest_framework import generics
+from django.contrib.auth import logout
 from django.contrib.auth import login, authenticate
+
 from aplicacion.forms import SignUpForm
 from django.shortcuts import render, redirect
 
@@ -38,18 +40,39 @@ class TakeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = TakeSerializer
 
 
+#def signup(request):
+    #if request.method == 'POST':
+     #   form = SignUpForm(request.POST)
+      #  if form.is_valid():
+            # este form save, guarda en la base, solo es eso
+            # form.save(commit=False)
+       #     form.save()
+        #    return redirect('signup')
+    #else:
+     #   form = SignUpForm()
+    #return render(request, 'signup.html', {'form': form})
+
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            # este form save, guarda en la base, solo es eso
-            # form.save(commit=False)
             form.save()
-            return redirect('signup')
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('index')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'index.html')
 
 def index(request):
     return render(request, 'index.html')

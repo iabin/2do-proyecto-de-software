@@ -2,10 +2,15 @@
 {% block title %}Registro{% endblock %}
 {% block content %}
 
-  <h2>Regístrate</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Enviar</button>
-  </form>
+
+    <div class="card col-md-5 offset-md-4 col-xs-12" >
+        <div style="margin-top: 20px; text-align: center">
+             <h2>Regístrate</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+    </div>
+    </div>
 {% endblock %}

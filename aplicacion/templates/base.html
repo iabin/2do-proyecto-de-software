@@ -48,12 +48,27 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Clases</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'signup' %}">Regístratre</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+
+                    <a class="nav-link font-weight-bold" href="#">{{ user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">Regístratre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Inicia Sesión</a>
+                    </li>
+                {% endif %}
+
             </ul>
             <form class="form-inline my-2 my-lg-0" method="get" action="{% url 'busca' %}">
-                <input id="busqueda" name="busqueda" class="form-control mr-sm-2" type="search" placeholder="Busca una clase"
+                <input id="busqueda" name="busqueda" class="form-control mr-sm-2" type="search"
+                       placeholder="Busca una clase"
                        aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
@@ -64,12 +79,7 @@
 
 <header>
 
-    <h1>My Site</h1>
-    {% if user.is_authenticated %}
 
-    {% else %}
-        <a href="{% url 'signup' %}">signup</a>
-    {% endif %}
     <hr>
 </header>
 <main>
