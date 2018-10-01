@@ -4,6 +4,7 @@ from django.forms.widgets import DateInput
 from aplicacion.models import Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from aplicacion.models import Course
 
 
 
@@ -20,6 +21,27 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2', )
+
+
+class CrearClaseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        exclude = ['teacher']
+        fields = ('id', 'title', 'description', 'level')
+        widgets = {
+            # 'teacher' : forms.Select(attrs={'class' : 'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escribe el nombre de la clase'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'level': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escribe el nivel de la clase'}),
+
+        }
+
+        labels = {
+            # 'teacher': _('Profesor'),
+            'title': _('Titulo'),
+            'description': _('Descripcion'),
+            'level': _('Nivel'),
+        }
 
 
 

@@ -17,7 +17,9 @@ urlpatterns = [
     #url(r'^users/(?P<format>[a-z0-9]+)/$', views.UserDetail.as_view()),
     #path(r'^take/(?P[0-9]+)/$', views.TakeList.as_view()),
     url(r'^tomados/$', views.TakeList.as_view()),
-
+    url(r'^course/(?P<pk>\d+)$', views.CourseDetailView.as_view(template_name='course-detail.html'), name='course-detail'),
+    url(r'^user/(?P<pk>\d+)$', views.UserDetailView.as_view(template_name='user-detail.html'), name='user-detail'),
+    url(r'^crearClase/$', views.crearClase, name='crearClase'),
     url(r'^', errorViews.noEncontrado),
 
 ]
