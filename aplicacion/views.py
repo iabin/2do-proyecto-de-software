@@ -85,6 +85,7 @@ def busca(request):
     toSearch = request.GET['busqueda']
     if not toSearch:
         return HttpResponse("return this string")
+
     searchResult = Course.objects.filter(title__icontains=toSearch)
     return render(request, 'resultados.html', {'resultados': searchResult})
 
