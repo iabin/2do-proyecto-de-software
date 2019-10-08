@@ -9,7 +9,7 @@ from ShareProf import settings
 urlpatterns = [
     url(r'^users/$', views.UserList.as_view()),
     url(r'^signup/$', views.signup, name='signup'),
-    url(r'^index/$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^course/$', views.CourseList.as_view()),
     url(r'^busca/$', views.busca,name='busca'),
     url(r'^login/$', auth_views.LoginView.as_view(), name='login'),
